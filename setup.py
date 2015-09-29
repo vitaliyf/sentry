@@ -49,6 +49,7 @@ for m in ('multiprocessing', 'billiard'):
 
 ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__)))
 IS_LIGHT_BUILD = os.environ.get('SENTRY_LIGHT_BUILD') == '1'
+print 'SENTRY_LIGHT_BUILD', IS_LIGHT_BUILD
 
 dev_requires = [
     'flake8>=2.0,<2.1',
