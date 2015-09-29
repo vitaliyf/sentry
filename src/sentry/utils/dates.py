@@ -7,7 +7,10 @@ sentry.utils.dates
 """
 from __future__ import absolute_import
 
-from datetime import datetime
+from datetime import (
+    datetime,
+    timedelta,
+)
 from dateutil.parser import parse
 from django.db import connections
 
@@ -28,8 +31,15 @@ DATE_TRUNC_GROUPERS = {
 }
 
 
+epoch = datetime(1970, 1, 1, tzinfo=pytz.utc)
+
+
 def to_timestamp(value):
-    return (value - datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
+    return (value - epoch).total_seconds()
+
+
+def to_datetime(value):
+    return epoch + timedelta(seconds=value)
 
 
 def get_sql_date_trunc(col, db='default', grouper='hour'):
